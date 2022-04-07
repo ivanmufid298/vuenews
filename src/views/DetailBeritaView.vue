@@ -1,17 +1,17 @@
 <template>
   <div>
-    <DetailNews />
+    <DetailBerita />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import DetailNews from "@/components/DetailNews.vue";
+import DetailBerita from "@/components/DetailBerita.vue";
 
 export default {
-  name: "DetailNewsView",
+  name: "DetailBeritaView",
   components: {
-    DetailNews,
+    DetailBerita,
   },
 };
 </script>

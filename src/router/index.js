@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import ListNewsView from "../views/ListNewsView.vue";
-import DetailNewsView from "../views/DetailNewsView.vue";
+import ListBeritaView from "../views/ListBeritaView.vue";
+import DetailBeritaView from "../views/DetailBeritaView.vue";
 import DefaultView from "../views/DefaultView.vue";
 
 Vue.use(VueRouter);
@@ -18,12 +18,12 @@ const routes = [
       {
         path: "",
         name: "Berita",
-        component: ListNewsView,
+        component: ListBeritaView,
       },
       {
         path: "/:slug",
         name: "Detail Berita",
-        component: DetailNewsView,
+        component: DetailBeritaView,
       },
     ],
   },

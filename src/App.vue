@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{ path: '/' }">Semua Berita</router-link>
+      <!-- <router-link :to="{ path: '/' }">Semua Berita</router-link> -->
     </div>
     <p></p>
     <router-view />

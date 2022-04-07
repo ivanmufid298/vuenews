@@ -5,23 +5,23 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 const dataPers = createPersistedState({
-  state: ["listNews", "OneNews"],
+  state: ["listBerita", "OneBerita"],
 });
 export default new Vuex.Store({
   plugins: [dataPers],
   state: {
-    listNews: [],
-    OneNews: [],
+    listBerita: [],
+    OneBerita: [],
   },
   getters: {},
   mutations: {
-    setNews(state, payload) {
+    setBerita(state, payload) {
       console.log(payload);
-      state.listNews = payload.articles;
+      state.listBerita = payload.articles;
     },
-    setOneNews(state, payload) {
+    setOneBerita(state, payload) {
       console.log(payload);
-      state.oneNews = state.listNews.find(
+      state.oneBerita = state.listBerita.find(
         (item) =>
           item.title
             .toLowerCase() // LowerCase
@@ -32,17 +32,17 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    fetchListNews(store) {
+    fetchListBerita(store) {
       axios
         .get(
-          "https://newsapi.org/v2/top-headlines?country=id&apiKey=2418fb5a837a4ad69a6de201af5e0e35"
+          "https://newsapi.org/v2/everything?q=bitcoin&apiKey=99da639dc1ce4117912c24440c9ecf6d"
         )
         .then((response) => {
-          store.commit("setNews", response.data);
+          store.commit("setBerita", response.data);
         });
     },
-    getNews(store, slug) {
-      store.commit("setOneNews", slug);
+    getBerita(store, slug) {
+      store.commit("setOneBerita", slug);
     },
   },
   modules: {},
