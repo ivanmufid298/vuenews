@@ -1,110 +1,76 @@
 <template>
-  <div id="listNews">
-    <h1>Berita Terkini</h1>
-    <ul>
-      <li v-for="berita in listNews" :key="berita.id">
-        <div class="card">
-          <img :src="berita.urlToImage" class="card-img-top" />
-          <div class="card-body">
-            <p class="card-author">
-              By <b>{{ berita.author }}</b> -
+  <div id="listBerita">
+    <h1 class="my-5">Berita Terkini</h1>
+    <v-layout row class="mx-10">
+      <v-container
+        v-for="berita in listBerita"
+        :key="berita.id"
+        flex
+        xs12
+        sm6
+        md4
+        lg3
+      >
+        <v-card elevation="2" outlined shaped>
+          <v-img :src="berita.urlToImage" max-height="150" />
+
+          <v-card-subtitle>
+            By <b>{{ berita.author }}</b> -
+            <p>
               {{ moment(berita.publishedAt).locale("id").format("LLLL") }}
             </p>
-            <h4 class="card-title">{{ berita.title }}</h4>
-            <p class="card-text">
-              {{ berita.description }}
-            </p>
-            <button>
-              <router-link
-                :to="{
-                  name: 'Detail Berita',
-                  params: { slug: toSlug(berita.title) },
-                }"
-              >
-                Lihat selengkapnya
-              </router-link>
-            </button>
-          </div>
-        </div>
-      </li>
-    </ul>
+          </v-card-subtitle>
+          <h4 class="text-center px-3">{{ berita.title }}</h4>
+          <v-card-text>
+            {{ berita.description }}
+          </v-card-text>
+          <v-btn
+            class="primary mb-5"
+            small
+            :to="{
+              name: 'Detail Berita',
+              params: { slug: toSlug(berita.title) },
+            }"
+            >Lihat selengkapnya
+          </v-btn>
+        </v-card>
+      </v-container>
+    </v-layout>
   </div>
 </template>
 
 <script>
 export default {
   computed: {
-    listNews() {
-      return this.$store.state.listNews;
+    search() {
+      return this.$store.state.search;
+    },
+    listBerita() {
+      return this.$store.state.listBerita.filter((item) => {
+        return item.title.toLowerCase().match(this.search.toLowerCase());
+      });
     },
   },
-
   methods: {
-    fetchNews() {
-      this.$store.dispatch("fetchListNews");
+    fetchBerita(value) {
+      this.$store.dispatch("fetchListBerita", value);
     },
-
     toSlug(value) {
       value = value
-        .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/&/g, `-and-`)
+        .toLowerCase() // LowerCase
+        .replace(/\s+/g, "-") // space to -
+        .replace(/&/g, `-and-`) // & to and
         .replace(/--/g, `-`);
       return value;
     },
   },
   mounted() {
-    this.fetchNews();
+    this.fetchBerita(this.$store.state.category);
   },
 };
 </script>
 <style scoped>
-#listNews {
+#listBerita {
   text-align: center;
-}
-ul {
-  justify-content: center;
-}
-li {
-  list-style-type: none;
-  display: inline-flex;
-}
-img {
-  height: 13rem;
-  width: 100%;
-}
-.card {
-  flex-wrap: wrap;
-  width: 60rem;
-  margin: 5px 5px;
-  background-color: whitesmoke;
-}
-
-.card-body {
-  text-align: left;
-  padding: 0 15px 30px;
-}
-
-.card-author {
-  font-size: 13px;
-}
-
-.card-title {
-  line-height: 1.3;
-}
-
-.card-text {
-  font-size: 15px;
-  margin-bottom: 25px;
-  line-height: 1.2;
-}
-
-.button {
-  background: rgb(20, 138, 216);
-  color: white;
-  padding: 8px 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
 }
 </style>

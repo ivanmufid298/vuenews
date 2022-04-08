@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <img
+    <v-img
       :src="oneNews.urlToImage"
       style="height: 30rem; width: 100%; display: block"
     />
@@ -12,9 +12,10 @@
     <p style="font-size: 20px">{{ oneNews.content }}</p>
     <a :href="oneNews.url" target="_blank">Baca selengkapnya</a>
     <div>
-      <button>
-        <router-link :to="{ path: '/' }">Kembali</router-link>
-      </button>
+      <v-btn class="secondary mr-5" @click="$router.back()">Kembali</v-btn>
+      <v-btn :href="oneNews.url" target="_blank" class="blue darken-4"
+        >Baca selengkapnya</v-btn
+      >
     </div>
   </v-container>
 </template>
@@ -35,9 +36,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-a {
-  font-weight: bold;
-  text-decoration: none;
-}
-</style>
+<style scoped></style>
