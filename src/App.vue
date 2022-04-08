@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
-    <div id="nav">
+  <v-app id="app">
+    <v-app id="nav">
       <!-- <router-link :to="{ path: '/' }">Semua Berita</router-link> -->
-    </div>
+    </v-app>
     <p></p>
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <style>

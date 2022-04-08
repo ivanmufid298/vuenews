@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 0 250px">
+  <v-container>
     <img
       :src="oneNews.urlToImage"
       style="height: 30rem; width: 100%; display: block"
@@ -16,7 +16,7 @@
         <router-link :to="{ path: '/' }">Kembali</router-link>
       </button>
     </div>
-  </div>
+  </v-container>
 </template>
 <script>
 export default {
